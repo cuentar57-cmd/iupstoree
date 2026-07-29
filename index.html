@@ -17,6 +17,7 @@
       <a href="#inicio">Inicio</a>
       <a href="#modelos">iPhones</a>
       <a class="cart-link" href="carrito.html">🛍 Carrito <b id="cartCount">0</b></a>
+      <button class="theme-toggle" id="themeToggle" aria-label="Cambiar tema">☀</button>
     </nav>
   </header>
 
@@ -63,6 +64,12 @@
   <footer><strong>IUPSTORE</strong><p>iPhone es una marca registrada de Apple Inc. Tienda independiente.</p><span>© 2026</span></footer>
 
   <div class="toast" id="toast">Producto agregado al carrito</div>
+  <div class="modal-backdrop" id="productModal" aria-hidden="true">
+    <section class="product-modal" role="dialog" aria-modal="true">
+      <button class="modal-close" id="closeProductModal" aria-label="Cerrar">×</button>
+      <div id="productModalContent"></div>
+    </section>
+  </div>
   <script src="script.js"></script>
 </body>
 </html>
