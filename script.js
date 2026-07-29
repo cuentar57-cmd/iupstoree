@@ -20,7 +20,7 @@ document.getElementById("productModal")?.addEventListener("click",e=>{if(e.targe
 document.getElementById("closeCheckoutModal")?.addEventListener("click",()=>{document.getElementById("checkoutModal")?.classList.remove("open");document.body.classList.remove("modal-open")});
 document.getElementById("checkoutForm")?.addEventListener("submit",e=>{e.preventDefault();saveCart([]);document.getElementById("checkoutContent").innerHTML=`<div class="success"><span>✓</span><p class="eyebrow">PEDIDO PREPARADO</p><h2>¡Gracias por elegir IUPSTORE!</h2><p class="muted">Un asesor confirmará disponibilidad, entrega y forma de pago.</p><a class="btn primary" href="index.html">Volver a la tienda</a></div>`});
 document.documentElement.dataset.theme=localStorage.getItem("iupstore-theme")||"dark";
-function updateThemeIcon(){const button=document.getElementById("themeToggle");if(!button)return;button.innerHTML=document.documentElement.dataset.theme==="dark"
+function updateThemeIcon(){const isDark=document.documentElement.dataset.theme==="dark";document.body.classList.toggle("light-theme",!isDark);const button=document.getElementById("themeToggle");if(!button)return;button.innerHTML=isDark
 ?'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.3 15.1A8.5 8.5 0 0 1 8.9 3.7 8.5 8.5 0 1 0 20.3 15.1Z"/></svg>'
 :'<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>'}
 updateThemeIcon();
