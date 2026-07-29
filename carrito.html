@@ -9,7 +9,7 @@
 <body class="cart-page">
   <header class="header">
     <a class="brand" href="index.html"><img src="public/assets/iupstore-logo.jpg" alt="IUPSTORE"><strong>IUPSTORE</strong></a>
-    <nav><a href="index.html#modelos">Seguir comprando</a><a class="cart-link active" href="carrito.html">🛍 Carrito <b id="cartCount">0</b></a></nav>
+    <nav><a href="index.html#modelos">Seguir comprando</a><a class="cart-link active" href="carrito.html">🛍 Carrito <b id="cartCount">0</b></a><button class="theme-toggle" id="themeToggle" aria-label="Cambiar tema">☀</button></nav>
   </header>
   <main class="cart-main">
     <div class="section-title">
@@ -18,6 +18,24 @@
     </div>
     <div id="cartContent"></div>
   </main>
+  <div class="modal-backdrop" id="checkoutModal" aria-hidden="true">
+    <section class="checkout-modal" role="dialog" aria-modal="true">
+      <button class="modal-close" id="closeCheckoutModal" aria-label="Cerrar">×</button>
+      <div id="checkoutContent">
+        <p class="eyebrow">ÚLTIMO PASO</p><h2>Finalizar compra</h2>
+        <p class="muted">Completá tus datos para preparar el pedido.</p>
+        <form id="checkoutForm" class="checkout-form">
+          <label>Nombre y apellido<input required autocomplete="name"></label>
+          <label>WhatsApp<input type="tel" required autocomplete="tel" placeholder="+54 9..."></label>
+          <label class="wide">Correo electrónico<input type="email" required autocomplete="email"></label>
+          <label class="wide">Forma de entrega<select required><option value="">Seleccionar</option><option>Retiro coordinado</option><option>Envío a domicilio</option></select></label>
+          <label class="wide">Forma de pago<select required><option value="">Seleccionar</option><option>Transferencia</option><option>Efectivo</option><option>Consultar financiación</option></select></label>
+          <label class="wide">Notas<textarea rows="3" placeholder="Color, capacidad o comentario adicional"></textarea></label>
+          <button class="btn primary wide" type="submit">Confirmar pedido →</button>
+        </form>
+      </div>
+    </section>
+  </div>
   <script src="script.js"></script>
 </body>
 </html>
