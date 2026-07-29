@@ -13,3 +13,112 @@ html[data-theme=light]{--bg:#f5f6fa;--surface:#fff;--surface2:#eceef5;--text:#10
 @keyframes copyIn{from{opacity:0;transform:translateX(-35px)}to{opacity:1;transform:none}}@keyframes visualIn{from{opacity:0;transform:translateX(50px) scale(.96)}to{opacity:1;transform:none}}@keyframes phoneFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-13px)}}
 html[data-theme=light] .hero{background:radial-gradient(circle at 72% 48%,#7963ff33,transparent 31%),linear-gradient(115deg,#f8f9fc,#e9ecf6)}html[data-theme=light] .benefits{background:#eceef5}html[data-theme=light] .brand,html[data-theme=light] nav{background:#ffffffd9}html[data-theme=light] nav a,html[data-theme=light] .theme-toggle{color:#4d515c}
 @media(max-width:850px){.theme-toggle{display:none}.modal-grid{grid-template-columns:1fr}.modal-visual{min-height:330px}.modal-visual .phone{height:230px}.modal-info{padding:35px 22px}.specs{grid-template-columns:1fr}.modal-footer{align-items:stretch;flex-direction:column}.modal-footer .btn{width:100%}.checkout-form{grid-template-columns:1fr}.checkout-form .wide{grid-column:auto}}
+
+
+/* Ajustes móviles: tema visible y dos productos por fila */
+@media (max-width: 850px) {
+  .header {
+    gap: 8px;
+    align-items: center;
+  }
+  .header nav {
+    gap: 2px;
+    padding: 5px;
+  }
+  .header nav > a:not(.cart-link) {
+    display: none;
+  }
+  .theme-toggle {
+    display: grid;
+    flex: 0 0 38px;
+    width: 38px;
+    height: 38px;
+  }
+  .theme-toggle svg {
+    width: 19px;
+    height: 19px;
+  }
+  .cart-link {
+    padding: 9px 10px;
+  }
+  .products {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
+  .product-card {
+    min-width: 0;
+    padding: 14px 10px;
+    border-radius: 18px;
+  }
+  .product-card .phone {
+    width: 82px;
+    height: 158px;
+    border-width: 3px;
+    border-radius: 21px;
+  }
+  .product-card .phone i {
+    top: 9px;
+    left: 8px;
+    width: 30px;
+    height: 30px;
+    border-width: 6px;
+  }
+  .product-card > p {
+    min-height: 32px;
+    margin: 15px 0 4px;
+    font-size: .7rem;
+    line-height: 1.35;
+  }
+  .product-card h3 {
+    min-height: 40px;
+    margin-bottom: 5px;
+    font-size: 1.05rem;
+    line-height: 1.1;
+  }
+  .product-card > strong {
+    font-size: .76rem;
+  }
+  .card-actions {
+    grid-template-columns: 1fr;
+    gap: 7px;
+    margin-top: 13px;
+  }
+  .info-btn,
+  .add-btn {
+    min-height: 38px;
+    padding: 8px 5px;
+    font-size: .7rem;
+  }
+  .add-btn svg {
+    width: 16px;
+    height: 16px;
+  }
+  .modal-grid {
+    grid-template-columns: 1fr;
+  }
+  .product-modal {
+    width: min(94vw, 520px);
+  }
+  .modal-visual {
+    min-height: 260px;
+  }
+  .modal-visual .phone {
+    width: 105px;
+    height: 205px;
+  }
+  .modal-info {
+    padding: 28px 19px;
+  }
+  .modal-info h2 {
+    font-size: 2.35rem;
+  }
+  .specs {
+    grid-template-columns: 1fr 1fr;
+    gap: 7px;
+  }
+  .specs div,
+  .option {
+    padding: 11px;
+    font-size: .78rem;
+  }
+}
