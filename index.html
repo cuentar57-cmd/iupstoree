@@ -1,34 +1,68 @@
 <!doctype html>
 <html lang="es">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta http-equiv="refresh" content="0; url=https://tienda-iphone-premium.servi1055.chatgpt.site/" />
-  <title>IUPSTORE</title>
-  <style>
-    :root { color-scheme: dark; }
-    * { box-sizing: border-box; }
-    body {
-      min-height: 100vh; margin: 0; display: grid; place-items: center;
-      background: radial-gradient(circle at 70% 30%, #352276 0, #10111a 35%, #07080b 70%);
-      color: #fff; font-family: Inter, system-ui, sans-serif; text-align: center;
-    }
-    main { padding: 32px; }
-    h1 { margin: 0 0 12px; font-size: clamp(2.5rem, 9vw, 5rem); letter-spacing: -.06em; }
-    p { color: #b8bbc5; }
-    a {
-      display: inline-block; margin-top: 16px; padding: 14px 22px; border-radius: 12px;
-      background: linear-gradient(110deg, #7c5cff, #4da3ff); color: white;
-      text-decoration: none; font-weight: 700;
-    }
-  </style>
-  <script>window.location.replace("https://tienda-iphone-premium.servi1055.chatgpt.site/");</script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="IUPSTORE — iPhones seleccionados, garantía y atención personalizada.">
+  <title>IUPSTORE | Tu próximo iPhone</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+  <header class="header">
+    <a class="brand" href="#inicio">
+      <img src="public/assets/iupstore-logo.jpg" alt="IUPSTORE">
+      <strong>IUPSTORE</strong>
+    </a>
+    <nav>
+      <a href="#inicio">Inicio</a>
+      <a href="#modelos">iPhones</a>
+      <a class="cart-link" href="carrito.html">🛍 Carrito <b id="cartCount">0</b></a>
+    </nav>
+  </header>
+
   <main>
-    <h1>IUPSTORE</h1>
-    <p>Abriendo la tienda…</p>
-    <a href="https://tienda-iphone-premium.servi1055.chatgpt.site/">Entrar a la tienda</a>
+    <section class="hero" id="inicio">
+      <div class="hero-copy">
+        <p class="eyebrow">TECNOLOGÍA QUE TE ACOMPAÑA</p>
+        <h1>Tu próximo<br><span>iPhone</span> está acá.</h1>
+        <p>Equipos seleccionados, garantía y atención personalizada para que elijas con total confianza.</p>
+        <div class="actions">
+          <a class="btn primary" href="#modelos">Ver modelos →</a>
+          <a class="btn secondary" href="#contacto">Consultar por WhatsApp</a>
+        </div>
+        <div class="trust"><span>✓ Garantía incluida</span><span>✓ Equipos verificados</span></div>
+      </div>
+      <div class="hero-image">
+        <img src="public/assets/hero-phone.webp" alt="iPhone">
+        <span>Nuevo · Rendimiento Pro</span>
+      </div>
+    </section>
+
+    <section class="section" id="modelos">
+      <div class="section-title">
+        <div><p class="eyebrow">ELEGÍ EL TUYO</p><h2>Modelos destacados</h2></div>
+      </div>
+      <div class="products" id="productGrid"></div>
+    </section>
+
+    <section class="benefits section">
+      <div><p class="eyebrow">COMPRAR TRANQUILO</p><h2>Todo lo que necesitás.<br>Sin vueltas.</h2></div>
+      <div class="benefit-grid">
+        <article><b>01</b><h3>Garantía real</h3><p>Todos nuestros equipos cuentan con garantía y revisión previa.</p></article>
+        <article><b>02</b><h3>Atención personal</h3><p>Te ayudamos a elegir según tu uso y presupuesto.</p></article>
+        <article><b>03</b><h3>Entrega segura</h3><p>Coordinamos cada entrega para tu tranquilidad.</p></article>
+      </div>
+    </section>
+
+    <section class="contact section" id="contacto">
+      <div><p class="eyebrow">ESTAMOS PARA AYUDARTE</p><h2>¿Cuál va a ser<br>tu próximo iPhone?</h2></div>
+      <div><p>Consultanos por modelos, colores y capacidades disponibles.</p><a class="btn primary" href="https://wa.me/" target="_blank" rel="noreferrer">Hablar por WhatsApp</a></div>
+    </section>
   </main>
+
+  <footer><strong>IUPSTORE</strong><p>iPhone es una marca registrada de Apple Inc. Tienda independiente.</p><span>© 2026</span></footer>
+
+  <div class="toast" id="toast">Producto agregado al carrito</div>
+  <script src="script.js"></script>
 </body>
 </html>
