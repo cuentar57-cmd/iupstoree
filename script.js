@@ -1,30 +1,23 @@
-const products = [
-  { id:"iphone-16-pro", name:"iPhone 16 Pro", detail:"Titanio · 256 GB", value:1299, color:"titanium", label:"Pro" },
-  { id:"iphone-16", name:"iPhone 16", detail:"Ultramarino · 128 GB", value:999, color:"blue", label:"iPhone" },
-  { id:"iphone-15", name:"iPhone 15", detail:"Negro · 128 GB", value:799, color:"black", label:"iPhone" }
-];
-const money = value => new Intl.NumberFormat("es-AR",{style:"currency",currency:"USD",maximumFractionDigits:0}).format(value);
-const getCart = () => JSON.parse(localStorage.getItem("iupstore-cart-static") || "[]");
-const saveCart = cart => { localStorage.setItem("iupstore-cart-static", JSON.stringify(cart)); updateCount(); };
-function updateCount(){ const el=document.getElementById("cartCount"); if(el) el.textContent=getCart().reduce((a,b)=>a+b.quantity,0); }
-function addToCart(id){
-  const cart=getCart(), item=cart.find(x=>x.id===id);
-  if(item) item.quantity++; else cart.push({id,quantity:1});
-  saveCart(cart);
-  const toast=document.getElementById("toast"); if(toast){toast.classList.add("show");setTimeout(()=>toast.classList.remove("show"),1800);}
-}
-function changeQuantity(id,amount){ const cart=getCart().map(x=>x.id===id?{...x,quantity:x.quantity+amount}:x).filter(x=>x.quantity>0);saveCart(cart);renderCart(); }
-function renderProducts(){
-  const grid=document.getElementById("productGrid"); if(!grid)return;
-  grid.innerHTML=products.map(p=>`<article class="product-card"><div class="phone ${p.color}"><i></i><span>${p.label}</span></div><p>${p.detail}</p><h3>${p.name}</h3><strong>Desde ${money(p.value)}</strong><button class="add-btn" onclick="addToCart('${p.id}')">🛍 Agregar</button></article>`).join("");
-}
-function renderCart(){
-  const root=document.getElementById("cartContent"); if(!root)return;
-  const cart=getCart();
-  if(!cart.length){root.innerHTML=`<div class="empty"><div>🛍</div><h2>Tu carrito está vacío</h2><p>Elegí un modelo para comenzar tu compra.</p><a class="btn primary" href="index.html#modelos">Ver iPhones</a></div>`;return;}
-  const rows=cart.map(item=>{const p=products.find(x=>x.id===item.id);return {...p,quantity:item.quantity}}).filter(x=>x.id);
-  const total=rows.reduce((a,p)=>a+p.value*p.quantity,0);
-  root.innerHTML=`<div class="cart-layout"><div class="cart-items">${rows.map(p=>`<article class="cart-item"><div class="cart-phone ${p.color}">${p.label}</div><div><small>${p.detail}</small><h3>${p.name}</h3><strong>${money(p.value)}</strong></div><div class="quantity"><button onclick="changeQuantity('${p.id}',-1)">−</button><span>${p.quantity}</span><button onclick="changeQuantity('${p.id}',1)">+</button></div><strong>${money(p.value*p.quantity)}</strong><button class="remove" onclick="changeQuantity('${p.id}',-${p.quantity})">Eliminar</button></article>`).join("")}</div><aside class="summary"><p class="eyebrow">RESUMEN</p><div><span>Productos</span><strong>${rows.reduce((a,p)=>a+p.quantity,0)}</strong></div><div><span>Entrega</span><strong>A coordinar</strong></div><div class="total"><span>Total</span><strong>${money(total)}</strong></div><a class="btn primary" href="https://wa.me/?text=${encodeURIComponent("Hola, quiero consultar por mi pedido de IUPSTORE por "+money(total))}" target="_blank">Finalizar por WhatsApp →</a><small>Precio y disponibilidad sujetos a confirmación.</small></aside></div>`;
-}
-document.getElementById("clearCart")?.addEventListener("click",()=>{saveCart([]);renderCart();});
-renderProducts(); renderCart(); updateCount();
+const products=[
+{id:"iphone-16-pro",name:"iPhone 16 Pro",detail:"Titanio · 256 GB",value:1299,color:"titanium",label:"Pro",display:"6,3″ Super Retina XDR",camera:"Sistema Pro de 48 MP",chip:"Chip A18 Pro",battery:"Hasta 27 h de video",capacities:"128 GB · 256 GB · 512 GB · 1 TB",colors:"Titanio natural · Titanio negro · Titanio blanco"},
+{id:"iphone-16",name:"iPhone 16",detail:"Ultramarino · 128 GB",value:999,color:"blue",label:"iPhone",display:"6,1″ Super Retina XDR",camera:"Sistema Fusion de 48 MP",chip:"Chip A18",battery:"Hasta 22 h de video",capacities:"128 GB · 256 GB · 512 GB",colors:"Ultramarino · Negro · Rosa"},
+{id:"iphone-15",name:"iPhone 15",detail:"Negro · 128 GB",value:799,color:"black",label:"iPhone",display:"6,1″ Super Retina XDR",camera:"Cámara principal de 48 MP",chip:"Chip A16 Bionic",battery:"Hasta 20 h de video",capacities:"128 GB · 256 GB · 512 GB",colors:"Negro · Azul · Verde"}];
+const money=v=>new Intl.NumberFormat("es-AR",{style:"currency",currency:"USD",maximumFractionDigits:0}).format(v);
+const getCart=()=>JSON.parse(localStorage.getItem("iupstore-cart-static")||"[]");
+const saveCart=cart=>{localStorage.setItem("iupstore-cart-static",JSON.stringify(cart));updateCount()};
+function updateCount(){const el=document.getElementById("cartCount");if(el)el.textContent=getCart().reduce((a,b)=>a+b.quantity,0)}
+function addToCart(id){const cart=getCart(),item=cart.find(x=>x.id===id);if(item)item.quantity++;else cart.push({id,quantity:1});saveCart(cart);const toast=document.getElementById("toast");if(toast){toast.classList.add("show");setTimeout(()=>toast.classList.remove("show"),1800)}}
+function changeQuantity(id,amount){saveCart(getCart().map(x=>x.id===id?{...x,quantity:x.quantity+amount}:x).filter(x=>x.quantity>0));renderCart()}
+function openProduct(id){const p=products.find(x=>x.id===id),modal=document.getElementById("productModal"),root=document.getElementById("productModalContent");if(!p||!modal||!root)return;root.innerHTML=`<div class="modal-grid"><div class="modal-visual"><div class="phone ${p.color}"><i></i><span>${p.label}</span></div></div><div class="modal-info"><p class="eyebrow">INFORMACIÓN DEL PRODUCTO</p><h2>${p.name}</h2><p class="muted">${p.detail}</p><div class="specs"><div><small>Pantalla</small><strong>${p.display}</strong></div><div><small>Cámara</small><strong>${p.camera}</strong></div><div><small>Rendimiento</small><strong>${p.chip}</strong></div><div><small>Batería</small><strong>${p.battery}</strong></div></div><div class="option"><small>Capacidades disponibles</small><p>${p.capacities}</p></div><div class="option"><small>Colores disponibles</small><p>${p.colors}</p></div><div class="modal-footer"><strong>Desde ${money(p.value)}</strong><button class="btn primary" onclick="addToCart('${p.id}');closeProduct()">🛍 Agregar al carrito</button></div></div></div>`;modal.classList.add("open");document.body.classList.add("modal-open")}
+function closeProduct(){document.getElementById("productModal")?.classList.remove("open");document.body.classList.remove("modal-open")}
+function renderProducts(){const grid=document.getElementById("productGrid");if(!grid)return;grid.innerHTML=products.map((p,i)=>`<article class="product-card reveal" style="--delay:${i*120}ms"><div class="phone ${p.color}"><i></i><span>${p.label}</span></div><p>${p.detail}</p><h3>${p.name}</h3><strong>Desde ${money(p.value)}</strong><div class="card-actions"><button class="info-btn" onclick="openProduct('${p.id}')">Ver información</button><button class="add-btn" onclick="addToCart('${p.id}')">🛍 Agregar</button></div></article>`).join("");observeReveals()}
+function renderCart(){const root=document.getElementById("cartContent");if(!root)return;const cart=getCart();if(!cart.length){root.innerHTML=`<div class="empty"><div>🛍</div><h2>Tu carrito está vacío</h2><p>Elegí un modelo para comenzar tu compra.</p><a class="btn primary" href="index.html#modelos">Ver iPhones</a></div>`;return}const rows=cart.map(item=>({...products.find(x=>x.id===item.id),quantity:item.quantity})).filter(x=>x.id),total=rows.reduce((a,p)=>a+p.value*p.quantity,0);root.innerHTML=`<div class="cart-layout"><div class="cart-items">${rows.map((p,i)=>`<article class="cart-item reveal" style="--delay:${i*90}ms"><div class="cart-phone ${p.color}">${p.label}</div><div><small>${p.detail}</small><h3>${p.name}</h3><strong>${money(p.value)}</strong></div><div class="quantity"><button onclick="changeQuantity('${p.id}',-1)">−</button><span>${p.quantity}</span><button onclick="changeQuantity('${p.id}',1)">+</button></div><strong>${money(p.value*p.quantity)}</strong><button class="remove" onclick="changeQuantity('${p.id}',-${p.quantity})">Eliminar</button></article>`).join("")}</div><aside class="summary reveal"><p class="eyebrow">RESUMEN</p><div><span>Productos</span><strong>${rows.reduce((a,p)=>a+p.quantity,0)}</strong></div><div><span>Entrega</span><strong>A coordinar</strong></div><div class="total"><span>Total</span><strong>${money(total)}</strong></div><button class="btn primary" id="openCheckout">Ir al checkout →</button><small>Precio y disponibilidad sujetos a confirmación.</small></aside></div>`;document.getElementById("openCheckout")?.addEventListener("click",()=>{document.getElementById("checkoutModal")?.classList.add("open");document.body.classList.add("modal-open")});observeReveals()}
+function observeReveals(){const observer=new IntersectionObserver(entries=>entries.forEach(x=>{if(x.isIntersecting)x.target.classList.add("visible")}),{threshold:.1});document.querySelectorAll(".section,.reveal").forEach(x=>observer.observe(x))}
+document.getElementById("clearCart")?.addEventListener("click",()=>{saveCart([]);renderCart()});
+document.getElementById("closeProductModal")?.addEventListener("click",closeProduct);
+document.getElementById("productModal")?.addEventListener("click",e=>{if(e.target===e.currentTarget)closeProduct()});
+document.getElementById("closeCheckoutModal")?.addEventListener("click",()=>{document.getElementById("checkoutModal")?.classList.remove("open");document.body.classList.remove("modal-open")});
+document.getElementById("checkoutForm")?.addEventListener("submit",e=>{e.preventDefault();saveCart([]);document.getElementById("checkoutContent").innerHTML=`<div class="success"><span>✓</span><p class="eyebrow">PEDIDO PREPARADO</p><h2>¡Gracias por elegir IUPSTORE!</h2><p class="muted">Un asesor confirmará disponibilidad, entrega y forma de pago.</p><a class="btn primary" href="index.html">Volver a la tienda</a></div>`});
+document.documentElement.dataset.theme=localStorage.getItem("iupstore-theme")||"dark";
+document.getElementById("themeToggle")?.addEventListener("click",()=>{const next=document.documentElement.dataset.theme==="dark"?"light":"dark";document.documentElement.dataset.theme=next;localStorage.setItem("iupstore-theme",next)});
+renderProducts();renderCart();updateCount();observeReveals();
