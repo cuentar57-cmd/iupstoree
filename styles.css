@@ -194,3 +194,55 @@ html[data-theme=light] .hero{background:radial-gradient(circle at 72% 48%,#7963f
     height: 78px;
   }
 }
+
+
+/* Identidad de portada y tarjetas adaptables al tema */
+.hero-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0 0 18px;
+  font-size: clamp(1.05rem, 1.6vw, 1.35rem);
+  font-weight: 900;
+  letter-spacing: .22em;
+  color: var(--text);
+}
+.hero-brand::before {
+  content: "";
+  width: 34px;
+  height: 3px;
+  border-radius: 5px;
+  background: linear-gradient(90deg, var(--violet), var(--blue));
+  box-shadow: 0 0 18px rgba(124,92,255,.75);
+}
+.product-card {
+  background: linear-gradient(145deg, #171923, #0c0d12);
+  color: var(--text);
+  transition: background .3s ease, color .3s ease, border-color .3s ease, transform .3s ease, box-shadow .3s ease;
+}
+html[data-theme="light"] .product-card {
+  background: linear-gradient(145deg, #ffffff, #eef0f7);
+  border-color: rgba(15,17,24,.12);
+  box-shadow: 0 14px 35px rgba(38,43,65,.08);
+}
+html[data-theme="light"] .product-card:hover {
+  border-color: rgba(93,76,255,.42);
+  box-shadow: 0 22px 48px rgba(72,68,125,.16);
+}
+html[data-theme="light"] .product-card > strong {
+  color: #456ea8;
+}
+html[data-theme="light"] .info-btn {
+  background: rgba(255,255,255,.75);
+  border-color: rgba(15,17,24,.14);
+  color: #171923;
+}
+html[data-theme="light"] .add-btn {
+  color: #fff;
+}
+@media (max-width: 850px) {
+  .hero-brand {
+    margin-bottom: 13px;
+    font-size: .92rem;
+  }
+}
