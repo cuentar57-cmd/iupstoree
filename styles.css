@@ -246,3 +246,20 @@ html[data-theme="light"] .add-btn {
     font-size: .92rem;
   }
 }
+
+
+/* Corrección reforzada del tema claro */
+body.light-theme .products .product-card {
+  background: linear-gradient(145deg, #ffffff 0%, #f1f3f9 100%) !important;
+  border-color: rgba(20,24,35,.14) !important;
+  color: #101118 !important;
+  box-shadow: 0 14px 36px rgba(38,43,65,.1) !important;
+}
+body.light-theme .products .product-card p { color: #606673 !important; }
+body.light-theme .products .product-card h3 { color: #101118 !important; }
+body.light-theme .products .product-card > strong { color: #3d659c !important; }
+body.light-theme .products .info-btn {
+  background: #ffffff !important;
+  border-color: rgba(20,24,35,.18) !important;
+  color: #171923 !important;
+}
